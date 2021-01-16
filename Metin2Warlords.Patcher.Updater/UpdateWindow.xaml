@@ -1,0 +1,15 @@
+﻿<Window x:Class="Metin2Warlords.Patcher.Updater.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Metin2Warlords.Patcher.Updater"
+        mc:Ignorable="d"
+        Title="PreloadWindow" Height="250" Width="558" AllowsTransparency="True" WindowStyle="None" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Background="{x:Null}" Icon="favicon.ico">
+    <Grid x:Name="imageGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="logo.png"/>
+        </Grid.Background>
+        <ProgressBar x:Name="singleProgressBar" Height="6" Margin="189,228,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="359" Foreground="#FF21F347" Visibility="Hidden"/>
+    </Grid>
+</Window>

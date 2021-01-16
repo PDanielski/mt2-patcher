@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metin2Warlords.Patcher", "Metin2Warlords.Patcher\Metin2Warlords.Patcher.csproj", "{A5456731-559A-4540-A939-99E02F27B9F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metin2Warlords.Patcher.Updater", "Metin2Warlords.Patcher.Updater\Metin2Warlords.Patcher.Updater.csproj", "{631724FC-7425-47F5-B72E-B90E35F56BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metin2Warlords.Patcher.Common", "Metin2Warlords.Patcher.Common\Metin2Warlords.Patcher.Common.csproj", "{39583520-2B14-49F8-AF20-A73B1FA7483D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Debug|Any CPU.Build.0 = Debug|x86
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Debug|x86.ActiveCfg = Release|Any CPU
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Debug|x86.Build.0 = Release|Any CPU
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Release|Any CPU.ActiveCfg = Release|x86
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Release|Any CPU.Build.0 = Release|x86
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Release|x86.ActiveCfg = Release|x86
+		{A5456731-559A-4540-A939-99E02F27B9F7}.Release|x86.Build.0 = Release|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Debug|Any CPU.Build.0 = Debug|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Debug|x86.ActiveCfg = Release|Any CPU
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Debug|x86.Build.0 = Release|Any CPU
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Release|Any CPU.ActiveCfg = Release|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Release|Any CPU.Build.0 = Release|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Release|x86.ActiveCfg = Release|x86
+		{631724FC-7425-47F5-B72E-B90E35F56BD8}.Release|x86.Build.0 = Release|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Debug|Any CPU.Build.0 = Debug|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Debug|x86.ActiveCfg = Release|Any CPU
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Debug|x86.Build.0 = Release|Any CPU
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Release|Any CPU.ActiveCfg = Release|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Release|Any CPU.Build.0 = Release|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Release|x86.ActiveCfg = Release|x86
+		{39583520-2B14-49F8-AF20-A73B1FA7483D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3B0B24C-6094-414D-9D7C-EC5620094568}
+	EndGlobalSection
+EndGlobal

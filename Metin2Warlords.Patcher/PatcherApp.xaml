@@ -1,0 +1,8 @@
+﻿<Application x:Class="Metin2Warlords.Patcher.PatcherApp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Metin2Warlords.Patcher">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
