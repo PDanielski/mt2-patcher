@@ -51,8 +51,8 @@ namespace Metin2Warlords.Patcher
             preloadWindow.Hide();
 
             PatcherWindow patcherWindow = new PatcherWindow(Client, ObsoleteFileFinder, remotePatchFiles, obsoletePatchFiles);   
-            patcherWindow.Initialize();
             patcherWindow.Show();
+            patcherWindow.StartUpdateIfNeeded();
 
         }
 

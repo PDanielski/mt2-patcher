@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Metin2Warlords.Patcher"
         mc:Ignorable="d"
-        Title="Metin2Warlords" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="WidthAndHeight" Left="0" Height="500" SnapsToDevicePixels="True" Width="952" Icon="img/favicon.ico" Topmost="True" WindowStyle="None">
+        Title="Warlords2" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="WidthAndHeight" Left="0" Height="645" SnapsToDevicePixels="True" Width="1120" Icon="img/favicon.ico" Topmost="True" WindowStyle="None">
     <Window.Resources>
-        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+        <Style x:Key="BigRedButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle">
                 <Setter.Value>
                     <Style>
@@ -30,7 +29,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
 
-                        <Border Cursor="Hand" CornerRadius="2" x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Height="41" Margin="0,0,-17,0">
+                        <Border Cursor="Hand" CornerRadius="5" x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" >
                             <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -38,7 +37,14 @@
                                 <Setter Property="Background" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="#404040"/>
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFD32727"/>
+                                            <GradientStop Color="#FF911C1C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" TargetName="border" Value="#404040"/>
@@ -49,6 +55,8 @@
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" TargetName="border" Value="#d4d4d4"/>
                                 <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#8d8d8d"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#9f9f9f"/>
+
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -58,69 +66,119 @@
 
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="img/Sfondo/Sfondo.png"/>
+        <ImageBrush ImageSource="img/bg.png"/>
     </Window.Background>
-    <Grid Margin="0,24,0,0">
-        <ProgressBar x:Name="multiProgressBar" Margin="22,0,22,67" BorderThickness="0" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FF5C150F" Panel.ZIndex="100" Background="#FF212121" Height="5" VerticalAlignment="Bottom" UseLayoutRounding="False" Padding="1" Focusable="True"/>
-        <TextBlock x:Name="progressStatus" TextAlignment="Right" Margin="0,0,22,35" TextWrapping="Wrap" FontSize="14" TextOptions.TextHintingMode="Animated" FontStretch="Condensed" HorizontalAlignment="Right" Width="189" Height="19" VerticalAlignment="Bottom" Cursor="Arrow" Foreground="White"/>
-        <TextBlock x:Name="globalPercentage" TextAlignment="Right" Margin="0,0,22,77" TextWrapping="Wrap" FontSize="14" TextOptions.TextHintingMode="Animated" FontStretch="Condensed" HorizontalAlignment="Right" Width="189" Height="19" VerticalAlignment="Bottom" Cursor="Arrow" Foreground="White"/>
-        <Grid Margin="749,0,0,136">
-            <Button x:Name="patchButton" Content="PATCH" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="87" Background="#FF212121" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Height="106" FontFamily="Open Sans" FontSize="16" Foreground="White" Margin="0,35,71,0"/>
-            <Button x:Name="startButton" Content="START" HorizontalAlignment="Right" VerticalAlignment="Top" Width="87" Background="#FF212121" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Height="106" FontFamily="Open Sans" FontSize="16" Foreground="White" Margin="0,-22,71,0" Padding="18,8" ScrollViewer.CanContentScroll="True"/>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="433"/>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="44"/>
+            <ColumnDefinition Width="717"/>
+            <ColumnDefinition Width="17"/>
+            <ColumnDefinition Width="316"/>
+            <ColumnDefinition Width="26"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="99999" Background="#FF222222" LastChildFill="False">
+            <Grid DockPanel.Dock="Left" Height="22" VerticalAlignment="Top" Width="142">
+                <Image Source="/img/favicon.ico" Width="10" Height="10" Margin="4,4,128,5"/>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="19,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" FontSize="10" Foreground="White"><Run Text="Warlords2 Patcher"/><LineBreak/><Run/></TextBlock>
+                
+            </Grid>
+            <Button DockPanel.Dock="Right" x:Name="closeButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" BorderBrush="{x:Null}" Height="22" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
+                <Button.Content>
+                    <Image Source="/img/close.png" Stretch="Fill" Width="10" Height="10"/>
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Cursor="Hand" x:Name="border2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" TargetName="border2" Value="#b20202"></Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+           
+            <Button x:Name="minifyButton" DockPanel.Dock="Right" VerticalAlignment="Top" Width="22" BorderBrush="{x:Null}" Height="22" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
+                <Button.Content>
+                    <Image Source="/img/hide.png" Stretch="Fill" Width="10" Height="10"/>
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Cursor="Hand" x:Name="border3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" TargetName="border3" Value="#c0c0c0"></Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="repairButton" DockPanel.Dock="Right" VerticalAlignment="Top" Width="22" BorderBrush="{x:Null}" Height="22" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
+                <Button.Content>
+                    <Image Source="/img/repair.png" Stretch="Fill" Width="10" Height="10"/>
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Cursor="Hand" x:Name="border3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" TargetName="border3" Value="#c0c0c0"></Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.ColumnSpan="99999" Grid.Row="4">
+            <Button x:Name="startButton" Content="GIOCA" BorderThickness="1" BorderBrush="#c10101" VerticalAlignment="Top" Width="224" Style="{DynamicResource BigRedButton}" Height="62" FontFamily="Arial" FontSize="25.75" Foreground="White" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF911C1C"/>
+                        <GradientStop Color="#FFD32727" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button x:Name="registerButton" Content="REGISTRATI" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FF212121" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Height="106" FontFamily="Open Sans" FontSize="16" Foreground="White" Margin="0,263,62,-34" Padding="18,8"/>
-            <Button x:Name="repairButton" Content="REPAIR" Margin="0,89,71,0" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="87" Background="#FF212121" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Height="106" FontFamily="Open Sans" FontSize="16" Foreground="White"/>
-            
-        </Grid>
-        <Button x:Name="closeButton" HorizontalAlignment="Left" Margin="942,-24,0,0" VerticalAlignment="Top" Width="19" BorderBrush="{x:Null}" Height="19" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
-            <Button.Content>
-                <Image Source="/img/close.png" Stretch="Fill" Width="10" Height="10"/>
-            </Button.Content>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Cursor="Hand" x:Name="border2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" TargetName="border2" Value="#ed6464"></Setter>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button x:Name="minifyButton" HorizontalAlignment="Left" Margin="920,-24,0,0" VerticalAlignment="Top" Width="19" BorderBrush="{x:Null}" Height="19" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
-            <Button.Content>
-                <Image Source="/img/hide.png" Stretch="Fill" Width="10" Height="10"/>
-            </Button.Content>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Cursor="Hand" x:Name="border3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" TargetName="border3" Value="#c0c0c0"></Setter>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Grid HorizontalAlignment="Left" Height="19" Margin="0,-24,0,0" VerticalAlignment="Top" Width="142">
-            <Image Source="/img/favicon.ico" Width="10" Height="10" Margin="4,4,128,5"/>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="19,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" FontSize="10"><Run Text="Metin2Warlords"/><LineBreak/><Run/></TextBlock>
-        </Grid>
+
+        </DockPanel>
+        <DockPanel Grid.Row="5" Grid.ColumnSpan="999999">
+            <TextBlock DockPanel.Dock="Right" x:Name="progressStatus"  Margin="0,0,5,0" TextWrapping="Wrap" FontSize="14" TextOptions.TextHintingMode="Animated" FontStretch="Condensed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Arrow" Foreground="White" />
+        </DockPanel>
+        <ProgressBar Grid.Row="6" Grid.ColumnSpan="9999999" x:Name="multiProgressBar" BorderThickness="0" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FF5C150F" Panel.ZIndex="100" Background="#FF212121" Height="5" VerticalAlignment="Bottom" UseLayoutRounding="False" Padding="1" Focusable="True"/>
     </Grid>
 
 

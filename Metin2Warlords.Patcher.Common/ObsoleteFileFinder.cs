@@ -10,7 +10,7 @@ namespace Metin2Warlords.Patcher.Common
 
     public class ObsoleteFileFinder
     {
-        private const int MaxNumOfWorkers = 10;
+        private const int MaxNumOfWorkers = 1;
         public event SearchingCompletedEventHandler SearchingCompleted;
 
         public List<PatchFile> SearchObsoleteSyncronized(List<PatchFile> files)
@@ -27,8 +27,8 @@ namespace Metin2Warlords.Patcher.Common
 
         public async Task<List<PatchFile>> SearchObsoleteAsync(List<PatchFile> files)
         {
-            if (files.Count <= MaxNumOfWorkers)
-                return SearchObsoleteSyncronized(files);
+            if (MaxNumOfWorkers == 1 || files.Count <= MaxNumOfWorkers)
+                return await Task.Run(() => SearchObsoleteSyncronized(files));
 
             var maxBatchSize = files.Count / MaxNumOfWorkers;
             var tasks = new List<Task<List<PatchFile>>>();

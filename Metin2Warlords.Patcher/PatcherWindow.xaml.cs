@@ -26,17 +26,28 @@ namespace Metin2Warlords.Patcher
             Client = client;
             ObsoleteFileFinder = obsoleteFileFinder;
             RemoteFiles = remoteFiles;
+            ObsoleteFiles = obsoleteFiles;
 
-            patchButton.Click += patchButtonClick;
             startButton.Click += startButtonClick;
             repairButton.Click += repairButtonClick;
             registerButton.Click += registerButtonClick;
             closeButton.Click += closeButtonClick;
             minifyButton.Click += minButtonClick;
+            
+            this.MouseDown += OnMouseDown;
 
-            this.MouseDown += Window_MouseDown;
-
+            Initialize();
         }
+
+        public void StartUpdateIfNeeded()
+        {
+            if(ObsoleteFiles.Count > 0)
+            {
+                repairButton.IsEnabled = false;
+                _updateObsoleteFiles();
+            }
+        }
+
         public void Initialize()
         {
             if(ObsoleteFiles != null && ObsoleteFiles.Count > 0)
@@ -44,9 +55,6 @@ namespace Metin2Warlords.Patcher
                 startButton.IsEnabled = false;
                 repairButton.IsEnabled = false;
                 
-            } else
-            {
-                patchButton.IsEnabled = false;
             }
         }
 
@@ -61,16 +69,16 @@ namespace Metin2Warlords.Patcher
         public async void repairButtonClick(object sender, RoutedEventArgs e)
         {
             repairButton.IsEnabled = false;
-            var s = new Stopwatch();
-            s.Start();
+            startButton.IsEnabled = false;
             ObsoleteFiles = await ObsoleteFileFinder.SearchObsoleteAsync(RemoteFiles);
-            s.Stop();
-            MessageBox.Show(s.ElapsedMilliseconds.ToString());
             if(ObsoleteFiles.Count > 0)
             {
                 startButton.IsEnabled = false;
                 _updateObsoleteFiles();
-
+            } else
+            {
+                repairButton.IsEnabled = true;
+                startButton.IsEnabled = true;
             }
         }
 
@@ -93,12 +101,6 @@ namespace Metin2Warlords.Patcher
             this.WindowState = WindowState.Minimized;
         }
 
-        void patchButtonClick(object sender, RoutedEventArgs e)
-        {
-            patchButton.IsEnabled = false;
-            repairButton.IsEnabled = false;
-            _updateObsoleteFiles();
-        }
 
         private void _updateObsoleteFiles()
         {
@@ -119,7 +121,7 @@ namespace Metin2Warlords.Patcher
             Application.Current.Shutdown();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();

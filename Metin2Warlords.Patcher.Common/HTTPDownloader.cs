@@ -78,9 +78,9 @@ namespace Metin2Warlords.Patcher.Common
             string downloadPath = basePath + path;
             if (f.BasePath != String.Empty) Directory.CreateDirectory(Path.GetDirectoryName(path));
             client.DownloadFileAsync(new Uri(new Uri(client.BaseAddress), downloadPath), path);
-            client.DownloadFileCompleted += (object se, AsyncCompletedEventArgs es) =>
+            void onFileDownloaded(object se, AsyncCompletedEventArgs es)
             {
-                if (files.Count > index+1)
+                if (files.Count > index + 1)
                 {
                     index = index + 1;
                     f = files[index];
@@ -91,12 +91,15 @@ namespace Metin2Warlords.Patcher.Common
                     downloadPath = basePath + path;
                     if (f.BasePath != String.Empty) Directory.CreateDirectory(Path.GetDirectoryName(path));
                     client.DownloadFileAsync(new Uri(new Uri(client.BaseAddress), downloadPath), path);
-                } else
+                }
+                else
                 {
+                    client.DownloadFileCompleted -= onFileDownloaded;
                     OnAllFileDownloaded();
                 }
-            };
-      
+            }
+            client.DownloadFileCompleted += onFileDownloaded;
+
         }
 
         public void setAfterNewFileEventHandler(AfterFileDownloadedEventHandler e)
@@ -136,11 +139,11 @@ namespace Metin2Warlords.Patcher.Common
 
         protected virtual void OnAllFileDownloaded()
         {
-            if(allFileDownloaded != null)
-            {
-                allFileDownloaded(this);
-            }
+            allFileDownloaded?.Invoke(this);
+            if (Progress != null) client.DownloadProgressChanged -= Progress;
+            if (Completed != null) client.DownloadFileCompleted -= Completed;
         }
+
 
         protected virtual void OnAfterNewFile(PatchFile file)
         {
@@ -159,5 +162,6 @@ namespace Metin2Warlords.Patcher.Common
             }
             return files.Count;
         }
+
     }
 }

@@ -33,9 +33,16 @@ namespace Metin2Warlords.Patcher
 
         protected void allFileDownloaded(object sender)
         {
+            totalSize = downloader.getTotalSize();
+            baseCurrentSize = 0;
+            currentSize = 0;
+            lastBytes = 0;
+            bytesForSecond = 0;
             Application.Current.Dispatcher.Invoke((Action)(() => {
                 window.startButton.IsEnabled = true;
+                window.repairButton.IsEnabled = true;
                 window.multiProgressBar.Value = 100;
+                window.progressStatus.Text = "";
             }));
 
         }
@@ -60,15 +67,16 @@ namespace Metin2Warlords.Patcher
             
 
             currentSize = baseCurrentSize + (int)e.BytesReceived;
-            if (totalSize - currentSize < 100) {
-                int i = 2;
-            }
+
             double globalPercentage = ((double)currentSize / (double)totalSize) * 100;
-            string text = String.Format("{0} kB of {1}, {2} kB/s, {3}%", e.BytesReceived/1000, e.TotalBytesToReceive/1000, bytesForSecond, e.ProgressPercentage);
+
+            double mbReceived = currentSize / 1000000;
+            double mbTotal = totalSize / 1000000;
+            double mbPerSecond = (double)((double)bytesForSecond / (double)1000);
+            string text = String.Format("{0} MB of {1} MB, {2} MB/s, {3}%", mbReceived, mbTotal, mbPerSecond.ToString("F"), (int)globalPercentage);
             Application.Current.Dispatcher.Invoke((Action)(() => {
                 window.progressStatus.Text = text;
                 window.multiProgressBar.Value = globalPercentage;
-                window.globalPercentage.Text = ((int)globalPercentage).ToString() + "%";
             }));
 
         }
