@@ -253,6 +253,10 @@
   <ItemGroup>
     <Resource Include="img\repair.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\discord-onclick.png" />
+    <Resource Include="img\discord-std.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

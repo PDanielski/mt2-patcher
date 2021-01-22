@@ -178,7 +178,7 @@
         <DockPanel Grid.Row="5" Grid.ColumnSpan="999999">
             <TextBlock DockPanel.Dock="Right" x:Name="progressStatus"  Margin="0,0,5,0" TextWrapping="Wrap" FontSize="14" TextOptions.TextHintingMode="Animated" FontStretch="Condensed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Arrow" Foreground="White" />
         </DockPanel>
-        <ProgressBar Grid.Row="6" Grid.ColumnSpan="9999999" x:Name="multiProgressBar" BorderThickness="0" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FF5C150F" Panel.ZIndex="100" Background="#FF212121" Height="5" VerticalAlignment="Bottom" UseLayoutRounding="False" Padding="1" Focusable="True"/>
+        <ProgressBar Grid.Row="6" Grid.ColumnSpan="9999999" x:Name="multiProgressBar" BorderThickness="0" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#ffa800" Panel.ZIndex="100" Background="#FF212121" Height="5" VerticalAlignment="Bottom" UseLayoutRounding="False" Padding="1" Focusable="True"/>
     </Grid>
 
 
