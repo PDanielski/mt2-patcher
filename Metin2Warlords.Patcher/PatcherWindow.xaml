@@ -47,10 +47,24 @@
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="#404040"/>
+                                <Setter Property="Background" TargetName="border" >
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFD32727"/>
+                                            <GradientStop Color="#FF911C1C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="ToggleButton.IsChecked" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="#404040"/>
+                                <Setter Property="Background" TargetName="border" >
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFD32727"/>
+                                            <GradientStop Color="#FF911C1C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" TargetName="border" Value="#d4d4d4"/>
@@ -64,11 +78,12 @@
             </Setter>
         </Style>
 
+
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="img/bg.png"/>
     </Window.Background>
-    <Grid Margin="0,0,0,0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="22"/>
             <RowDefinition Height="15"/>
@@ -89,7 +104,7 @@
             <Grid DockPanel.Dock="Left" Height="22" VerticalAlignment="Top" Width="142">
                 <Image Source="/img/favicon.ico" Width="10" Height="10" Margin="4,4,128,5"/>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="19,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" FontSize="10" Foreground="White"><Run Text="Warlords2 Patcher"/><LineBreak/><Run/></TextBlock>
-                
+
             </Grid>
             <Button DockPanel.Dock="Right" x:Name="closeButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" BorderBrush="{x:Null}" Height="22" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
                 <Button.Content>
@@ -114,7 +129,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-           
+
             <Button x:Name="minifyButton" DockPanel.Dock="Right" VerticalAlignment="Top" Width="22" BorderBrush="{x:Null}" Height="22" Background="{x:Null}" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
                 <Button.Content>
                     <Image Source="/img/hide.png" Stretch="Fill" Width="10" Height="10"/>
@@ -163,8 +178,55 @@
                 </Button.Style>
             </Button>
         </DockPanel>
-        <DockPanel Grid.Column="1" Grid.ColumnSpan="99999" Grid.Row="4">
-            <Button x:Name="startButton" Content="GIOCA" BorderThickness="1" BorderBrush="#c10101" VerticalAlignment="Top" Width="224" Style="{DynamicResource BigRedButton}" Height="62" FontFamily="Arial" FontSize="25.75" Foreground="White" >
+
+        <DockPanel Grid.Row="2" Grid.Column="1">
+            <DockPanel.Background>
+                <ImageBrush ImageSource="{Binding Path=FrontImage}"/>
+            </DockPanel.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="299"/>
+                    <RowDefinition Height="90"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Path=FrontNews.Title}" Padding="19,9" Grid.Row="0" FontFamily="Arial" FontSize="24" Foreground="White">
+                    <TextBlock.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </TextBlock.Background>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="16" TextWrapping="Wrap" Text="{Binding Path=FrontNews.Description}" Padding="18,10" Grid.Row="2" FontFamily="Arial" FontSize="12" Foreground="White">
+                    <TextBlock.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </TextBlock.Background>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" LastChildFill="False">
+            <Button x:Name="startButton" Content="GIOCA" BorderThickness="1" BorderBrush="#c10101" Width="224" Style="{DynamicResource BigRedButton}" Height="62" FontFamily="Arial" FontSize="25.75" Foreground="White" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF911C1C"/>
@@ -172,8 +234,41 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="registerButton" Content="REGISTRATI" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FF212121" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Height="106" FontFamily="Open Sans" FontSize="16" Foreground="White" Margin="0,263,62,-34" Padding="18,8"/>
+            <Button x:Name="discordButton" DockPanel.Dock="Right"  Width="60" BorderBrush="{x:Null}" Height="61" Padding="0" Foreground="{x:Null}" BorderThickness="0" UseLayoutRounding="True">
+                <Button.Background>
+                    <ImageBrush ImageSource="img/discord-std.png"/>
+                </Button.Background>
 
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Cursor="Hand" x:Name="border4" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True" >
+                                            <Setter Property="Background" TargetName="border4">
+                                                <Setter.Value>
+                                                    <ImageBrush ImageSource="img/discord-onclick.png"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <ImageBrush ImageSource="img/discord-std.png"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </DockPanel>
         <DockPanel Grid.Row="5" Grid.ColumnSpan="999999">
             <TextBlock DockPanel.Dock="Right" x:Name="progressStatus"  Margin="0,0,5,0" TextWrapping="Wrap" FontSize="14" TextOptions.TextHintingMode="Animated" FontStretch="Condensed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Arrow" Foreground="White" />

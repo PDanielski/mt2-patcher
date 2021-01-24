@@ -1,4 +1,5 @@
 ﻿using Metin2Warlords.Patcher.Common;
+using Metin2Warlords.Patcher.NewsFeature;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,7 +38,6 @@ namespace Metin2Warlords.Patcher
 
             PreloadWindow preloadWindow = new PreloadWindow();
             preloadWindow.Show();
-
             InitializeWebClient();
 
             var remotePatchFiles = GetRemotePatchFiles();
@@ -48,9 +48,15 @@ namespace Metin2Warlords.Patcher
                 obsoletePatchFiles = await SearchForObsoletePatchFiles(remotePatchFiles);
             }
 
+            var frontNews = GetFrontNews();
             preloadWindow.Hide();
 
-            PatcherWindow patcherWindow = new PatcherWindow(Client, ObsoleteFileFinder, remotePatchFiles, obsoletePatchFiles);   
+            var patcherWindowViewModel = new PatcherWindowViewModel
+            {
+                FrontNews = frontNews
+            };
+            PatcherWindow patcherWindow = new PatcherWindow(Client, ObsoleteFileFinder, remotePatchFiles, obsoletePatchFiles);
+            patcherWindow.DataContext = patcherWindowViewModel;
             patcherWindow.Show();
             patcherWindow.StartUpdateIfNeeded();
 
@@ -105,6 +111,15 @@ namespace Metin2Warlords.Patcher
         private async Task<List<PatchFile>> SearchForObsoletePatchFiles(List<PatchFile> remotePatchFiles)
         {
             return await ObsoleteFileFinder.SearchObsoleteAsync(remotePatchFiles);
+        }
+
+        private News GetFrontNews()
+        {
+            var newsProvider = new PatchServerNewsProvider(ConfigurationManager.AppSettings["newsEndpointURL"], ConfigurationManager.AppSettings["newsImagePath"]);
+            var news = newsProvider.GetNews();
+            if (news == null || news.Count < 1)
+                return null;
+            return news[0];
         }
 
         private void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)

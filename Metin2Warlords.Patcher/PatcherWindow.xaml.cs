@@ -30,13 +30,19 @@ namespace Metin2Warlords.Patcher
 
             startButton.Click += startButtonClick;
             repairButton.Click += repairButtonClick;
-            registerButton.Click += registerButtonClick;
+
             closeButton.Click += closeButtonClick;
             minifyButton.Click += minButtonClick;
-            
+            discordButton.Click += discordButtonClick;
+
             this.MouseDown += OnMouseDown;
 
             Initialize();
+        }
+
+        private void discordButtonClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["discordURL"]);
         }
 
         public void StartUpdateIfNeeded()
